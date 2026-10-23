@@ -47,130 +47,197 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 </head>
 <body>
 
+<!-- NIHARIKA BIRTHDAY POPUP -->
+<div id="nih-birthday-popup" class="nih-popup-overlay">
 
-<!-- Birthday Animation for Niharika -->
-<div id="birthday-celebration">
-  <div class="birthday-glow"></div>
+  <div class="nih-popup-modal" role="dialog"
+       aria-modal="true" aria-labelledby="nih-birthday-title">
 
-  <div class="party-popper popper-left">🎉</div>
-  <div class="party-popper popper-right">🎊</div>
-
-  <div class="birthday-content">
-    <div class="birthday-label">✨ A SPECIAL DAY ✨</div>
-
-    <h1 class="birthday-title">
-      <span class="happy-line">Happy Birthday</span>
-      <span class="name-line">Niharika!</span>
-    </h1>
-
-    <p class="birthday-subtitle">
-      Wishing you endless happiness & magic 💖
-    </p>
-
-    <button id="birthday-replay" type="button">
-      🎉 Celebrate Again
+    <!-- CLOSE ICON -->
+    <button class="nih-popup-close" type="button"
+            aria-label="Close birthday popup">
+      &times;
     </button>
-  </div>
 
-  <div id="birthday-confetti"></div>
+    <!-- PARTY POPPERS -->
+    <div class="nih-popper nih-popper-left">🎉</div>
+    <div class="nih-popper nih-popper-right">🎊</div>
+
+    <!-- BIRTHDAY CONTENT -->
+    <div class="nih-birthday-content">
+
+      <div class="nih-birthday-label">
+        ✨ A SPECIAL DAY ✨
+      </div>
+
+      <h1 id="nih-birthday-title" class="nih-birthday-title">
+        <span class="nih-happy-line">Happy Birthday</span>
+        <span class="nih-name-line">Niharika!</span>
+      </h1>
+
+      <p class="nih-birthday-subtitle">
+        Wishing you endless happiness &amp; magic 💖
+      </p>
+
+      <button class="nih-celebrate-btn" type="button">
+        🎉 Celebrate Again
+      </button>
+
+    </div>
+
+    <!-- CONFETTI -->
+    <div class="nih-confetti-container"></div>
+
+  </div>
 </div>
 
 <style>
-#birthday-celebration {
-  position: relative;
-  width: 100%;
-  min-height: 520px;
-  overflow: hidden;
-  isolation: isolate;
+/* POPUP OVERLAY */
+#nih-birthday-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  background: radial-gradient(
-    circle at center,
-    #47205f 0%,
-    #1b1035 55%,
-    #090719 100%
-  );
-  color: #fff;
-  font-family: Arial, sans-serif;
-  border-radius: 16px;
+  padding: 20px;
+  background: rgba(10, 5, 20, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .4s ease, visibility .4s ease;
 }
 
-#birthday-celebration * {
+#nih-birthday-popup.nih-popup-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* POPUP BOX */
+.nih-popup-modal {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 850px;
+  min-height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.25);
+
+  /* Popup background remains transparent */
+  background: transparent !important;
+
+  color: #fff;
+  text-align: center;
+  transform: translateY(25px) scale(.94);
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+
+#nih-birthday-popup.nih-popup-visible .nih-popup-modal {
+  transform: translateY(0) scale(1);
+}
+
+.nih-popup-modal * {
   box-sizing: border-box;
 }
 
-.birthday-glow {
+/* CLOSE BUTTON */
+.nih-popup-close {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px;
+  border: 1px solid rgba(255,255,255,.4);
   border-radius: 50%;
-  background: #ff4fa3;
-  filter: blur(100px);
-  opacity: 0.3;
-  z-index: -1;
-  animation: birthdayGlow 4s ease-in-out infinite alternate;
+  background: rgba(20,10,30,.35);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .25s, transform .25s;
 }
 
-.birthday-content {
+.nih-popup-close:hover {
+  background: #ff78b8;
+  color: #25102f;
+  transform: rotate(90deg);
+}
+
+/* CONTENT */
+.nih-birthday-content {
   position: relative;
-  z-index: 2;
-  padding: 50px 20px;
-  max-width: 900px;
+  z-index: 4;
+  width: 100%;
+  padding: 65px 35px;
 }
 
-.birthday-label {
+.nih-birthday-label {
   color: #ffd76a;
-  letter-spacing: 5px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 5px;
   opacity: 0;
-  animation: birthdayFade 0.8s ease 0.3s forwards;
+  animation: nihFade .8s ease .3s forwards;
 }
 
-.birthday-title {
+.nih-birthday-title {
   margin: 24px 0 16px;
-  line-height: 1.12;
-  font-size: clamp(38px, 7vw, 82px);
+  font-family: inherit;
+  font-size: clamp(36px, 6vw, 76px);
   font-weight: 900;
+  line-height: 1.12;
 }
 
-.happy-line,
-.name-line {
+.nih-happy-line,
+.nih-name-line {
   display: block;
   opacity: 0;
-  transform: translateY(35px) scale(0.9);
-  animation: birthdayTitleIn 0.9s cubic-bezier(.2,.8,.2,1) forwards;
+  transform: translateY(30px) scale(.9);
+  animation: nihTitleIn .9s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-.happy-line {
-  animation-delay: 0.6s;
+.nih-happy-line {
+  animation-delay: .5s;
+  color: #fff;
 }
 
-.name-line {
+.nih-name-line {
   margin-top: 8px;
   color: #ff78b8;
   text-shadow: 0 0 25px #ff369a80;
-  animation-delay: 1.1s;
-  animation-name: birthdayTitleIn, birthdayNameGlow;
-  animation-duration: 0.9s, 2s;
-  animation-delay: 1.1s, 2s;
-  animation-iteration-count: 1, infinite;
-  animation-direction: normal, alternate;
+  animation:
+    nihTitleIn .9s cubic-bezier(.2,.8,.2,1) 1s forwards,
+    nihNameGlow 2s ease-in-out 2s infinite alternate;
 }
 
-.birthday-subtitle {
-  font-size: clamp(14px, 2vw, 19px);
-  color: #e7dff4;
+.nih-birthday-subtitle {
+  margin: 15px 0 0;
+  color: #fff;
+  font-size: clamp(14px, 2vw, 18px);
   opacity: 0;
-  animation: birthdayFade 0.8s ease 1.7s forwards;
+  animation: nihFade .8s ease 1.5s forwards;
 }
 
-#birthday-replay {
-  margin-top: 24px;
+/* CELEBRATE BUTTON */
+.nih-celebrate-btn {
+  position: relative;
+  z-index: 5;
+  margin-top: 26px;
   padding: 14px 25px;
-  border: 0;
+  border: none;
   border-radius: 50px;
   background: #ff78b8;
   color: #25102f;
@@ -178,164 +245,257 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 5px 25px #ff78b855;
-  transition: transform 0.25s, background 0.25s;
   opacity: 0;
-  animation: birthdayFade 0.8s ease 2s forwards;
+  animation: nihFade .8s ease 1.8s forwards;
+  transition: transform .25s, background .25s;
 }
 
-#birthday-replay:hover {
-  transform: translateY(-3px) scale(1.04);
+.nih-celebrate-btn:hover {
   background: #ffd76a;
+  transform: translateY(-3px) scale(1.04);
 }
 
-.party-popper {
+/* PARTY POPPERS */
+.nih-popper {
   position: absolute;
-  top: 50%;
-  font-size: clamp(45px, 7vw, 90px);
+  top: 45%;
+  z-index: 2;
+  font-size: clamp(42px, 6vw, 78px);
   opacity: 0;
-  z-index: 1;
-  animation: popperEntrance 1s ease 1.2s forwards,
-             popperFloat 3s ease-in-out 2.2s infinite;
+  animation:
+    nihPopperIn .8s ease 1s forwards,
+    nihPopperFloat 3s ease-in-out 1.8s infinite;
 }
 
-.popper-left {
-  left: 6%;
+.nih-popper-left {
+  left: 5%;
   transform: rotate(-20deg);
 }
 
-.popper-right {
-  right: 6%;
+.nih-popper-right {
+  right: 5%;
   transform: rotate(20deg);
-  animation-delay: 1.5s, 2.5s;
+  animation-delay: 1.2s, 2s;
 }
 
-.birthday-confetti-piece {
+/* CONFETTI */
+.nih-confetti-container {
   position: absolute;
-  top: -20px;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nih-confetti-piece {
+  position: absolute;
+  top: -15px;
   width: 8px;
   height: 12px;
   border-radius: 2px;
-  pointer-events: none;
-  animation: confettiFall linear forwards;
+  animation: nihConfettiFall linear forwards;
 }
 
-@keyframes birthdayFade {
+/* ANIMATIONS */
+@keyframes nihFade {
   to { opacity: 1; }
 }
 
-@keyframes birthdayTitleIn {
+@keyframes nihTitleIn {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
 
-@keyframes birthdayNameGlow {
+@keyframes nihNameGlow {
   from { text-shadow: 0 0 12px #ff369a55; }
-  to { text-shadow: 0 0 32px #ff369a, 0 0 55px #ff78b855; }
+  to {
+    text-shadow: 0 0 28px #ff369a, 0 0 50px #ff78b855;
+  }
 }
 
-@keyframes birthdayGlow {
-  from { transform: scale(0.8); opacity: 0.2; }
-  to { transform: scale(1.3); opacity: 0.45; }
-}
-
-@keyframes popperEntrance {
-  from { opacity: 0; }
+@keyframes nihPopperIn {
   to { opacity: 1; }
 }
 
-@keyframes popperFloat {
+@keyframes nihPopperFloat {
   0%, 100% { margin-top: 0; }
-  50% { margin-top: -18px; }
+  50% { margin-top: -15px; }
 }
 
-@keyframes confettiFall {
+@keyframes nihConfettiFall {
   to {
-    transform: translate3d(var(--drift), 550px, 0)
-               rotate(var(--rotation));
+    transform: translate3d(var(--nih-drift), 520px, 0)
+               rotate(var(--nih-rotation));
     opacity: 0;
   }
 }
 
+/* MOBILE */
 @media (max-width: 600px) {
-  #birthday-celebration {
-    min-height: 450px;
-    border-radius: 10px;
+  #nih-birthday-popup {
+    padding: 14px;
   }
 
-  .birthday-content {
-    padding: 45px 18px;
+  .nih-popup-modal {
+    min-height: 410px;
+    border-radius: 16px;
   }
 
-  .birthday-label {
+  .nih-birthday-content {
+    padding: 65px 18px 45px;
+  }
+
+  .nih-birthday-label {
     letter-spacing: 3px;
+    font-size: 10px;
   }
 
-  .party-popper {
+  .nih-popper {
     top: 12%;
-    font-size: 38px;
+    font-size: 35px;
   }
 
-  .popper-left { left: 8%; }
-  .popper-right { right: 8%; }
+  .nih-popper-left { left: 8%; }
+  .nih-popper-right { right: 8%; }
+
+  .nih-popup-close {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 26px;
+  }
 }
 
+/* REDUCED MOTION */
 @media (prefers-reduced-motion: reduce) {
-  #birthday-celebration *,
-  #birthday-celebration *::before,
-  #birthday-celebration *::after {
-    animation-duration: 0.01ms !important;
+  #nih-birthday-popup *,
+  #nih-birthday-popup *::before,
+  #nih-birthday-popup *::after {
+    animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: .01ms !important;
   }
 }
 </style>
 
 <script>
 (function () {
-  const root = document.getElementById("birthday-celebration");
-  if (!root || root.dataset.initialized) return;
+  const popup = document.getElementById("nih-birthday-popup");
 
-  root.dataset.initialized = "true";
+  if (!popup || popup.dataset.initialized) return;
+  popup.dataset.initialized = "true";
 
-  const confettiBox = document.getElementById("birthday-confetti");
-  const replayButton = document.getElementById("birthday-replay");
-  const colors = ["#ff78b8", "#ffd76a", "#75e6da",
-                  "#b99aff", "#ffffff", "#ff9757"];
+  const modal = popup.querySelector(".nih-popup-modal");
+  const closeButton = popup.querySelector(".nih-popup-close");
+  const celebrateButton = popup.querySelector(".nih-celebrate-btn");
+  const confettiContainer = popup.querySelector(
+    ".nih-confetti-container"
+  );
+
+  const colors = [
+    "#ff78b8", "#ffd76a", "#75e6da",
+    "#b99aff", "#ffffff", "#ff9757"
+  ];
+
+  let confettiTimer;
+  let previousFocus = null;
 
   function launchConfetti() {
-    confettiBox.innerHTML = "";
+    confettiContainer.innerHTML = "";
+    clearTimeout(confettiTimer);
 
-    const total = window.innerWidth < 600 ? 65 : 120;
+    const count = window.innerWidth < 600 ? 55 : 100;
+    const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < total; i++) {
+    for (let i = 0; i < count; i++) {
       const piece = document.createElement("span");
-      piece.className = "birthday-confetti-piece";
+      piece.className = "nih-confetti-piece";
 
       piece.style.left = Math.random() * 100 + "%";
       piece.style.backgroundColor =
         colors[Math.floor(Math.random() * colors.length)];
-      piece.style.setProperty(
-        "--drift", (Math.random() * 240 - 120) + "px"
-      );
-      piece.style.setProperty(
-        "--rotation", (Math.random() * 1080 - 540) + "deg"
-      );
-      piece.style.animationDuration = (2.5 + Math.random() * 3) + "s";
-      piece.style.animationDelay = (Math.random() * 1.5) + "s";
 
-      confettiBox.appendChild(piece);
+      piece.style.setProperty(
+        "--nih-drift",
+        (Math.random() * 220 - 110) + "px"
+      );
+
+      piece.style.setProperty(
+        "--nih-rotation",
+        (Math.random() * 1000 - 500) + "deg"
+      );
+
+      piece.style.animationDuration =
+        (2.5 + Math.random() * 2.5) + "s";
+
+      piece.style.animationDelay =
+        (Math.random() * .8) + "s";
+
+      fragment.appendChild(piece);
     }
 
-    window.setTimeout(() => {
-      confettiBox.innerHTML = "";
-    }, 7000);
+    confettiContainer.appendChild(fragment);
+
+    confettiTimer = setTimeout(function () {
+      confettiContainer.innerHTML = "";
+    }, 6500);
   }
 
-  replayButton.addEventListener("click", launchConfetti);
+  function openPopup() {
+    previousFocus = document.activeElement;
+    popup.classList.add("nih-popup-visible");
+    document.body.style.overflow = "hidden";
+    closeButton.focus();
+    launchConfetti();
+  }
 
-  launchConfetti();
+  function closePopup() {
+    popup.classList.remove("nih-popup-visible");
+    document.body.style.overflow = "";
+    clearTimeout(confettiTimer);
+    confettiContainer.innerHTML = "";
+
+    if (previousFocus && typeof previousFocus.focus === "function") {
+      previousFocus.focus();
+    }
+  }
+
+  closeButton.addEventListener("click", closePopup);
+
+  celebrateButton.addEventListener("click", launchConfetti);
+
+  /* CLOSE WHEN CLICKING OUTSIDE THE POPUP */
+  popup.addEventListener("click", function (event) {
+    if (event.target === popup) {
+      closePopup();
+    }
+  });
+
+  /* CLOSE WITH ESCAPE KEY */
+  document.addEventListener("keydown", function (event) {
+    if (
+      event.key === "Escape" &&
+      popup.classList.contains("nih-popup-visible")
+    ) {
+      closePopup();
+    }
+  });
+
+  /* OPEN AUTOMATICALLY AFTER PAGE LOAD */
+  function startPopup() {
+    openPopup();
+  }
+
+  if (document.readyState === "complete") {
+    setTimeout(startPopup, 500);
+  } else {
+    window.addEventListener("load", function () {
+      setTimeout(startPopup, 500);
+    }, { once: true });
+  }
 })();
 </script>
 
