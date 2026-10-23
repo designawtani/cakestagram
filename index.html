@@ -47,14 +47,18 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 </head>
 <body>
 
-<!-- NIHARIKA BIRTHDAY POPUP -->
+
+<!-- HAPPY BIRTHDAY NIHARIKA POPUP -->
 <div id="nih-birthday-popup" class="nih-popup-overlay">
 
-  <div class="nih-popup-modal" role="dialog"
-       aria-modal="true" aria-labelledby="nih-birthday-title">
+  <div class="nih-popup-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="nih-birthday-title">
 
-    <!-- CLOSE ICON -->
-    <button class="nih-popup-close" type="button"
+    <!-- FIXED CLOSE ICON -->
+    <button class="nih-popup-close"
+            type="button"
             aria-label="Close birthday popup">
       &times;
     </button>
@@ -65,7 +69,6 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 
     <!-- BIRTHDAY CONTENT -->
     <div class="nih-birthday-content">
-
       <div class="nih-birthday-label">
         ✨ A SPECIAL DAY ✨
       </div>
@@ -82,12 +85,10 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
       <button class="nih-celebrate-btn" type="button">
         🎉 Celebrate Again
       </button>
-
     </div>
 
     <!-- CONFETTI -->
     <div class="nih-confetti-container"></div>
-
   </div>
 </div>
 
@@ -116,7 +117,7 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   pointer-events: auto;
 }
 
-/* POPUP BOX */
+/* POPUP MODAL */
 .nih-popup-modal {
   position: relative;
   isolation: isolate;
@@ -129,12 +130,10 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   overflow: hidden;
   border-radius: 22px;
   border: 1px solid rgba(255,255,255,.25);
-
-  /* Popup background remains transparent */
   background: transparent !important;
-
   color: #fff;
   text-align: center;
+
   transform: translateY(25px) scale(.94);
   transition: transform .5s cubic-bezier(.2,.8,.2,1);
 }
@@ -147,36 +146,48 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   box-sizing: border-box;
 }
 
-/* CLOSE BUTTON */
+/* CLOSE ICON — STABLE POSITION AND NO ROTATION */
 .nih-popup-close {
   position: absolute;
   top: 16px;
   right: 16px;
-  z-index: 20;
+  z-index: 100;
+
   width: 42px;
   height: 42px;
+  padding: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0 4px;
-  border: 1px solid rgba(255,255,255,.4);
+
+  border: 1px solid rgba(255,255,255,.45);
   border-radius: 50%;
-  background: rgba(20,10,30,.35);
+  background: rgba(20,10,30,.65);
   color: #fff;
+
   font-family: Arial, sans-serif;
-  font-size: 30px;
+  font-size: 28px;
+  font-weight: 400;
   line-height: 1;
+
   cursor: pointer;
-  transition: background .25s, transform .25s;
+  transform: none !important;
+  transition: background .25s ease, color .25s ease;
 }
 
 .nih-popup-close:hover {
   background: #ff78b8;
   color: #25102f;
-  transform: rotate(90deg);
+  transform: none !important;
 }
 
-/* CONTENT */
+.nih-popup-close:focus-visible {
+  outline: 2px solid #ffd76a;
+  outline-offset: 4px;
+}
+
+/* BIRTHDAY CONTENT */
 .nih-birthday-content {
   position: relative;
   z-index: 4;
@@ -210,8 +221,8 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 }
 
 .nih-happy-line {
-  animation-delay: .5s;
   color: #fff;
+  animation-delay: .5s;
 }
 
 .nih-name-line {
@@ -247,7 +258,7 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   box-shadow: 0 5px 25px #ff78b855;
   opacity: 0;
   animation: nihFade .8s ease 1.8s forwards;
-  transition: transform .25s, background .25s;
+  transition: transform .25s ease, background .25s ease;
 }
 
 .nih-celebrate-btn:hover {
@@ -269,12 +280,10 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 
 .nih-popper-left {
   left: 5%;
-  transform: rotate(-20deg);
 }
 
 .nih-popper-right {
   right: 5%;
-  transform: rotate(20deg);
   animation-delay: 1.2s, 2s;
 }
 
@@ -309,7 +318,9 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 }
 
 @keyframes nihNameGlow {
-  from { text-shadow: 0 0 12px #ff369a55; }
+  from {
+    text-shadow: 0 0 12px #ff369a55;
+  }
   to {
     text-shadow: 0 0 28px #ff369a, 0 0 50px #ff78b855;
   }
@@ -332,7 +343,7 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   }
 }
 
-/* MOBILE */
+/* MOBILE RESPONSIVE */
 @media (max-width: 600px) {
   #nih-birthday-popup {
     padding: 14px;
@@ -361,15 +372,15 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   .nih-popper-right { right: 8%; }
 
   .nih-popup-close {
-    top: 10px;
-    right: 10px;
+    top: 12px;
+    right: 12px;
     width: 36px;
     height: 36px;
-    font-size: 26px;
+    font-size: 24px;
   }
 }
 
-/* REDUCED MOTION */
+/* REDUCED MOTION ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
   #nih-birthday-popup *,
   #nih-birthday-popup *::before,
@@ -388,7 +399,6 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   if (!popup || popup.dataset.initialized) return;
   popup.dataset.initialized = "true";
 
-  const modal = popup.querySelector(".nih-popup-modal");
   const closeButton = popup.querySelector(".nih-popup-close");
   const celebrateButton = popup.querySelector(".nih-celebrate-btn");
   const confettiContainer = popup.querySelector(
@@ -402,6 +412,7 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 
   let confettiTimer;
   let previousFocus = null;
+  let previousBodyOverflow = "";
 
   function launchConfetti() {
     confettiContainer.innerHTML = "";
@@ -432,7 +443,7 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
         (2.5 + Math.random() * 2.5) + "s";
 
       piece.style.animationDelay =
-        (Math.random() * .8) + "s";
+        Math.random() * .8 + "s";
 
       fragment.appendChild(piece);
     }
@@ -446,15 +457,19 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 
   function openPopup() {
     previousFocus = document.activeElement;
+    previousBodyOverflow = document.body.style.overflow;
+
     popup.classList.add("nih-popup-visible");
     document.body.style.overflow = "hidden";
+
     closeButton.focus();
     launchConfetti();
   }
 
   function closePopup() {
     popup.classList.remove("nih-popup-visible");
-    document.body.style.overflow = "";
+    document.body.style.overflow = previousBodyOverflow;
+
     clearTimeout(confettiTimer);
     confettiContainer.innerHTML = "";
 
@@ -464,17 +479,16 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
   }
 
   closeButton.addEventListener("click", closePopup);
-
   celebrateButton.addEventListener("click", launchConfetti);
 
-  /* CLOSE WHEN CLICKING OUTSIDE THE POPUP */
+  /* CLOSE ON OUTSIDE CLICK */
   popup.addEventListener("click", function (event) {
     if (event.target === popup) {
       closePopup();
     }
   });
 
-  /* CLOSE WITH ESCAPE KEY */
+  /* CLOSE WITH ESCAPE */
   document.addEventListener("keydown", function (event) {
     if (
       event.key === "Escape" &&
@@ -484,7 +498,7 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
     }
   });
 
-  /* OPEN AUTOMATICALLY AFTER PAGE LOAD */
+  /* AUTO-OPEN AFTER PAGE LOAD */
   function startPopup() {
     openPopup();
   }
