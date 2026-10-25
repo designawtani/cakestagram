@@ -513,6 +513,78 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
 })();
 </script>
 
+  <script>
+    /* Seamless scrolling marquee */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  padding: 17px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--wine);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  letter-spacing: .07em;
+  text-align: left;
+}
+
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  width: max-content;
+  animation: marqueeScroll 26s linear infinite;
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee-group span {
+  display: inline-block;
+  padding: 0 22px;
+}
+
+.marquee-group .marquee-star {
+  color: var(--wine);
+  padding: 0 6px;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .marquee {
+    font-size: 16px;
+    padding: 15px 0;
+  }
+
+  .marquee-group span {
+    padding: 0 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+  </script>
 
 
   
@@ -543,7 +615,29 @@ footer{border-top:1px solid var(--line)}.footer-logo{transition:transform .3s}.f
     </div>
   </div>
 </section>
-<div class="marquee"><span>HANDCRAFTED WITH LOVE</span> ✳ <span>MADE TO CELEBRATE</span> ✳ <span>A LITTLE EXTRA SWEETNESS</span> </div>
+<div class="marquee" aria-label="Handcrafted with love, made to celebrate, a little extra sweetness">
+  <div class="marquee-track">
+
+    <div class="marquee-group">
+      <span>HANDCRAFTED WITH LOVE</span>
+      <span class="marquee-star">✳</span>
+      <span>MADE TO CELEBRATE</span>
+      <span class="marquee-star">✳</span>
+      <span>A LITTLE EXTRA SWEETNESS</span>
+      <span class="marquee-star">✳</span>
+    </div>
+
+    <div class="marquee-group" aria-hidden="true">
+      <span>HANDCRAFTED WITH LOVE</span>
+      <span class="marquee-star">✳</span>
+      <span>MADE TO CELEBRATE</span>
+      <span class="marquee-star">✳</span>
+      <span>A LITTLE EXTRA SWEETNESS</span>
+      <span class="marquee-star">✳</span>
+    </div>
+
+  </div>
+</div>
 <section class="section" id="cakes">
   <div class="wrap">
     <div class="section-head"><div><div class="eyebrow">A few sweet favourites</div><h2>Made to make<br>you smile.</h2></div><p class="section-intro">From rich chocolate layers to playful custom creations, every cake has its own little personality.</p></div>
